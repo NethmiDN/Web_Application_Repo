@@ -1,29 +1,101 @@
-# My Memories Frontend
+# Memory Saver - Frontend Web Application
 
-A React + Vite frontend for a travel memory platform where users can create and explore memorable trips, blog posts, favorites, reviews, and uploaded media.
+A cloud-native single-page application built with React and Vite for the Memory Saver platform. It provides the user-facing interface for the enterprise microservices ecosystem and is deployed on Google Cloud Infrastructure using Firebase Hosting.
 
-## Overview
+## Student & Project Information
 
-This app helps users:
+| Field | Details |
+| :--- | :--- |
+| Student Name | Nethmi Nanayakkara |
+| Student ID | 241722047 |
+| GCP Project ID | `nethmi-project` |
+| Live Deployed URL | https://memory-saver-e56b8.web.app/ |
+| Module | ITS 2130 - Enterprise Cloud Architecture |
 
-- manage travel memories and events
-- browse destination details and travel stories
-- add and remove favorites
-- create and view blog posts related to destinations
-- upload photos for trips and events
-- review destination experiences
-- switch between users and profiles
+## Overview & Architecture
 
-The frontend is designed to work with a backend API gateway and gracefully falls back to in-memory mock data when the gateway is unavailable.
+The frontend communicates with backend microservices through a centralized Spring Cloud API Gateway hosted behind a GCP External HTTP(S) Load Balancer. It demonstrates end-to-end cloud-native integrations for:
 
-## Tech Stack
+- user profile and favorites management backed by Cloud SQL
+- travel destination and itinerary tracking
+- direct media uploads to Google Cloud Storage buckets
+- community reviews and interactive ratings
 
-- React 18
-- Vite
-- JavaScript
-- Axios for API requests
-- Firebase Hosting
-- Lucide React icons
+## Technology Stack
+
+- React / Vite
+- JavaScript (ES6+) / JSX
+- CSS3, Bootstrap, and icons
+- Axios for HTTP requests
+- Firebase Hosting for deployment
+- Firebase Tools CLI for build and deploy workflows
+
+## Live Deployment Details
+
+- Deployment model: Serverless / PaaS on Google Cloud via Firebase Hosting
+- Backend API gateway target: http://8.233.86.133
+- Live production URL: https://memory-saver-e56b8.web.app/
+
+## Local Setup & Development
+
+### Prerequisites
+
+- Node.js 18 or later
+- npm or yarn
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/NethmiDN/Web_Application_Repo.git
+cd Web_Application_Repo
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run the Development Server
+
+```bash
+npm run dev
+```
+
+Then open the local URL shown in the terminal, usually http://localhost:5173.
+
+## Available Scripts
+
+```bash
+npm run dev
+npm run build
+npm run preview
+```
+
+## API Configuration
+
+The frontend points to the public gateway configured in [src/services/api.js](src/services/api.js).
+
+```js
+const GATEWAY_URL = 'http://8.233.86.133';
+```
+
+If the backend is unavailable, the app falls back to in-memory mock data so the UI stays usable for demos and local development.
+
+## Firebase Deployment
+
+This project is configured for Firebase Hosting.
+
+```bash
+firebase deploy --only hosting
+```
+
+To preview the production build locally:
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Project Structure
 
@@ -44,80 +116,12 @@ src/
 │   ├── ReviewSection.jsx
 │   ├── Toast.jsx
 │   └── UserProfile.jsx
-├── services/
-│   └── api.js
-└── assets/
-```
-
-## Prerequisites
-
-Before running the app, make sure you have:
-
-- Node.js 18+ installed
-- npm installed
-- Firebase CLI installed if you plan to deploy
-
-## Getting Started
-
-1. Install dependencies:
-
-```bash
-npm install
-```
-
-2. Start the development server:
-
-```bash
-npm run dev
-```
-
-3. Open the local URL shown in the terminal, usually:
-
-```bash
-http://localhost:5173
-```
-
-## Available Scripts
-
-```bash
-npm run dev     # start Vite dev server
-npm run build   # create production build
-npm run preview # preview production build locally
-```
-
-## API Configuration
-
-The app uses the API gateway configured in `src/services/api.js`.
-
-```js
-const GATEWAY_URL = 'http://8.233.86.133';
-```
-
-If the backend is offline or unreachable, the app automatically uses mock data so the UI remains functional for demos and local development.
-
-## Firebase Deployment
-
-This project is configured for Firebase Hosting.
-
-### Deploy
-
-```bash
-firebase deploy --only hosting
-```
-
-### Local preview of the production build
-
-```bash
-npm run build
-npm run preview
+└── services/
+	└── api.js
 ```
 
 ## Notes
 
-- The project is a frontend-only client and depends on backend services for full live functionality.
-- The mock mode is useful for development, demos, and testing when the gateway is unavailable.
-- The app currently uses a public gateway address and in-memory fallback data for offline scenarios.
-
-## License
-
-This project does not currently include a license file. If needed, add one before publishing or sharing the code publicly.
+- The frontend is a client-only application and depends on backend services for full functionality.
+- Mock mode is available when the gateway is offline, which helps with demos and development.
+- The public gateway IP is currently hard-coded in the API service layer for simplicity.
