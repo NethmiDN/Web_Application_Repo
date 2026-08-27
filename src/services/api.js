@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 // API Gateway base URL
-const GATEWAY_URL = 'http://localhost:8080';
+// const GATEWAY_URL = 'http://localhost:8080';
+
+// API Gateway base URL (GCP Load Balancer Public IP)
+const GATEWAY_URL = 'http://8.233.86.133';
 
 const client = axios.create({
   baseURL: GATEWAY_URL,
